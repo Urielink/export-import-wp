@@ -1,0 +1,55 @@
+hagamos un ejercicio G,
+Crea una función PHP la cual a partir de un archivo CSV genere la muestra de código XML.
+Esto código debo poder verlo en pantalla con el siguiente formato.
+
+Extraer información de CSV: 
+ post_title, custom_sku, post_content, post_content_button_url, gallery_images_url, post_category, post_tag, post_extra_tags
+
+INDICACIONES:
+1. Agrupa post_title y custom_sku para imprimir en "<title><![CDATA[ post_title - custom_sku ]]></title>"
+2. Por cada linea de texto en post_content generar los parrafos de ese contenido.
+3. Por cada linea de texto en post_content_button_url generar el formato del boton.
+4. Por cada linea de texto en gallery_images_url generar el formato de la galeria.
+5. agregar la categoria de post_category.
+6. agregar etiquetas de post_tag y de post_extra_tags.
+
+formato por linea de producto:
+
+<item>
+	<title><![CDATA[ post_title - custom_sku ]]></title>
+	<content:encoded><![CDATA[
+
+<!-- wp:paragraph -->
+	<p> post_content[0] </p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+	<p> post_content[1] </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons">
+	<!-- wp:button -->
+		<div class="wp-block-button">
+			<a class="wp-block-button__link wp-element-button" href="post_content_button_url" target="_blank" rel="noreferrer noopener">Comprar</a>
+		</div>
+	<!-- /wp:button -->
+</div>
+<!-- /wp:buttons -->
+
+<!-- wp:gallery {"columns":5,"linkTo":"none"} -->
+<figure class="wp-block-gallery has-nested-images columns-5 is-cropped">
+
+	<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+		<figure class="wp-block-image size-large"><img src="gallery_images_url[0]" alt=""/></figure>
+	<!-- /wp:image -->
+
+	<!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
+		<figure class="wp-block-image size-large"><img src="gallery_images_url[1]" alt=""/></figure>
+	<!-- /wp:image -->
+
+</figure>
+<!-- /wp:gallery -->]]></content:encoded>
+
+	<category domain="category" nicename="4bf"><![CDATA[ post_category ]]></category>
+	<category domain="post_tag" nicename="pelota-para-perro"><![CDATA[ post_tag, post_extra_tags ]]></category>
+</item>
